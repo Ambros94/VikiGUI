@@ -1,0 +1,17 @@
+#mainTitle {
+    text-align: center;
+    font-size: 50px;
+}
+
+.width80 {
+    width:80%;
+}
+
+.centered {
+    margin: auto;
+}
+
+.wrapper {
+    text-align: center;
+}
+
