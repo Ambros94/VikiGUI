@@ -14,13 +14,21 @@ jQuery("#send").on("click", function () {
     // Remove previously displayed thumb
     jQuery("#thumbUp").css("display", "none");
     jQuery("#thumbDown").css("display", "none");
+    jQuery("#thumbHorizzontal").css("display", "none");
+
     socketClient.emit('textCommand', jQuery("#textCommand").val(), function (resp, data) {
-        console.log('Server sent resp code ' + resp);
-        if (resp === 200) {// Command succesfully received from server
-            console.log("good");
+        console.log('Server sent resp code:' + resp);// Good
+        if (resp === 1) {// Command succesfully received from server
+            console.log("Successfully executed");
             jQuery("#thumbUp").css("display", "inline-block");
-        } else if (resp === 404) {
-            console.log("bad");
+        } else if (resp === 503) {
+            console.log("Internal server error");
+        } else if (resp === -1) {
+            jQuery("#thumbHorizzontal").css("display", "inline-block");
+            console.log("Parameter missing");
+        } else if (resp === 0) {
+            jQuery("#thumbDown").css("display", "inline-block");
+            console.log("No command found");
         }
     });
 });
