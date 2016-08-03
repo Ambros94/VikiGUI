@@ -18,17 +18,19 @@ jQuery("#send").on("click", function () {
 
     socketClient.emit('textCommand', jQuery("#textCommand").val(), function (resp, data) {
         console.log('Server sent resp code:' + resp);// Good
-        if (resp === 1) {// Command succesfully received from server
+        if (resp === "OK") {// Command succesfully received from server
             console.log("Successfully executed");
             jQuery("#thumbUp").css("display", "inline-block");
-        } else if (resp === 503) {
+        } else if (resp === "UNKNOWN") {
             console.log("Internal server error");
-        } else if (resp === -1) {
+        } else if (resp.indexOf("MISSING") > -1) {
             jQuery("#thumbHorizzontal").css("display", "inline-block");
             console.log("Parameter missing");
-        } else if (resp === 0) {
+        } else if (resp === "LOW_CONFIDENCE") {
             jQuery("#thumbDown").css("display", "inline-block");
             console.log("No command found");
+        } else {
+            console.log("Unknown response code.")
         }
     });
 });
