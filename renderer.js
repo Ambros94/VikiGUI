@@ -18,7 +18,8 @@ jQuery("#send").on("click", function () {
 
     socketClient.emit('textCommand', jQuery("#textCommand").val(), function (resp, data) {
         console.log('Server sent resp code:' + resp);// Good
-        if (resp === "OK") {// Command succesfully received from server
+        jQuery("#response").text("Response code:" + resp);
+        if (resp === "OK") {// Command successfully received from server
             console.log("Successfully executed");
             jQuery("#thumbUp").css("display", "inline-block");
         } else if (resp === "UNKNOWN") {
